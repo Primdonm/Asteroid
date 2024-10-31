@@ -6,7 +6,8 @@ from constants import *
 i = True
 def main():
     pygame.init()
-    #pygame.display.set_mode()
+    dt=0
+    delta_Clock = pygame.time.Clock()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     print("Starting asteroids!")
     print(f"Screen width: {SCREEN_WIDTH}")
@@ -17,6 +18,9 @@ def main():
                 return
         screen.fill(000000)
         pygame.display.flip()
+        delta_Clock.tick(60)
+        dt = delta_Clock.tick(60) / 1000
+        #print(f"{dt}")
 if __name__ == "__main__":
     main()
 
