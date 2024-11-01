@@ -3,23 +3,26 @@
 # throughout this file
 import pygame
 from constants import *
-i = True
+from player import Player
+
 def main():
     pygame.init()
-    dt=0
-    delta_Clock = pygame.time.Clock()
+    
+    clock = pygame.time.Clock()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+    dt=0
     print("Starting asteroids!")
     print(f"Screen width: {SCREEN_WIDTH}")
     print(f"Screen height: {SCREEN_HEIGHT}")
-    while i is True:
+    while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
         screen.fill(000000)
-        pygame.display.flip()
-        delta_Clock.tick(60)
-        dt = delta_Clock.tick(60) / 1000
+        player.draw(screen)
+        pygame.display.flip()        
+        dt = clock.tick(60) / 1000
         #print(f"{dt}")
 if __name__ == "__main__":
     main()
