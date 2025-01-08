@@ -25,7 +25,7 @@ def main():
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = (updatable,)
     Shot.containers = (shots, updatable, drawable)
-    AsteroidField()
+    asteroid_field = AsteroidField()
     #CircleShape()
 
     player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
@@ -43,9 +43,14 @@ def main():
             obj.update(dt)
 
         for asteroid in asteroids:  # iterate through asteroids
-            if player.collisions(asteroid):  # assuming this is your collision method
+            if player.collides_with(asteroid):  # assuming this is your collision method
                 print("Game over!")
                 sys.exit()
+            
+            for shot in shots:
+                if asteroid.collides_with(shot):
+                    shot.kill()
+                    asteroid.kill()
 
         for obj in drawable:
             obj.draw(screen)
